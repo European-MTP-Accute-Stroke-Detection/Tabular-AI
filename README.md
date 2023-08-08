@@ -1,5 +1,5 @@
 
-<a name="stroke-backend"></a>
+<a name="Tabular AI"></a>
 <!--
 
 <!-- PROJECT LOGO -->
@@ -32,15 +32,12 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#file-description">File Description</a></li>
-        <li><a href="#setup-of-models-and-firebase">Setup of Models and Firebase</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -49,14 +46,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project and Repository
 
-This repository encompasses the comprehensive backend development of the "Decision Support Tool for Acute Stroke Diagnosis," undertaken as a collaborative effort by our master's team.
+This repository encompasses the comprehensive tabular AI development of the "Decision Support Tool for Acute Stroke Diagnosis," undertaken as a collaborative effort by our master's team.
 
-The backend fulfills several vital functions, including:
+The tabular AI fulfills several vital functions, including:
 
-* Execution of AI models: It efficiently runs the sophisticated AI models designed to aid in acute stroke diagnosis.
-* Generation of AI model explanations: The backend creates concise and interpretable explanations for the predictions made by the AI models, ensuring transparency and user trust.
-* Database management with Google Firebase: It effectively manages data storage, retrieval, and interaction with the Google Firebase platform, promoting seamless and secure information handling.
-* Additional functionalities: The backend is designed to handle various other tasks essential for the smooth functioning of the decision support tool, making it versatile and adaptive.
+* Experimentation with different ML techniques, such as Catboost, XGBoost, GDTs, etc.
+* Data preprcessing of tabular dataset containing medical stroke data.
+* Experimentation with XAI for Catboost 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -66,46 +62,21 @@ The backend fulfills several vital functions, including:
 
 You need an environment in anaconda with the correct packages to run the project on your own computer. 
 
-### Prerequisites
-
-To execute the code, additional python packages are required. For this, [requirements](requirements.txt) contains the package version used in this project. The installation can be done as follows:
-
-* pip
-  ```sh
-  pip install -r path/to/requirements.txt
-  ```
-
 ### File Description
 
 This project includes several python scripts and folders. The following list serves as a brief explanation.
 
-* [01_EDA](01_EDA.ipynb) - Loading the data and brief visual time series analysis. 
-* [02_Preprocessing](02_Preprocessing.ipynb) - Processing of the data to split the information and prepare it for training. 
-* [03_Modeling](03_Modeling.ipynb) - AI training with dataset creation.
-* [04_1_Artificial_Data](04_1_Artificial_Data.ipynb) -  Creation of artificial time series for AE and XAI tests. 
-* [04_Evaluation_Complete](04_Evaluation_Complete.ipynb) - Evaluation of AE results for complete time series.
-* [04_Evaluation_Segment](04_Evaluation_Segment.ipynb) - Evaluation of AE results for segmented time series.
-* [05_Explainability](05_Explainability.ipynb) - Application of XAI techniques covered in this thesis.
-* [PCE_AI](PCE_AI.ipynb) - AI pipeline for deployment testing. Contains the final preprocessing used for the thesis submission.
+* [data](data) - Data from https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
+* [Old_Scripts](Old_Scripts) - Old Scripts 
+* [Scripts](Scripts) - Scripts with created objects for AI execution in backend
 
-
-### Setup of Models and Firebase
-
-For the successful execution of the backend, it is imperative to ensure two key steps: first, the correct linkage of models to the main code, and second, the accurate configuration of Firebase access tokens in the database functionalities. 
-
-
-<!-- USAGE EXAMPLES -->
 ## Usage
 
+The central focus of this repository is housed within the [Scripts](Scripts) directory. This directory encapsulates a collection of meticulously crafted scripts tailored to facilitate the training of diverse AI techniques, ranging from [Catboost](Scripts/catboost.ipynb) to [XGBoost](Scripts/xgboost.ipynb). Furthermore, it serves as a hub for delving into data exploration through Exploratory Data Analysis [EDA](Scripts/eda.ipynb).
 
-Once all components on the Python side are meticulously set up, and the trained models are seamlessly integrated with the code and data access to Firebase is established, the backend becomes fully prepared for execution.
+Each file contains concise comments detailing its contents and the steps it encompasses. After meticulous tuning using Optuna, the CatBoost model emerged as the optimal choice, striking a harmonious balance between accuracy, F1 recall, and precision. We then went on to elucidate its workings for integration into the BrainWatch app, using SHAP to provide a comprehensive explanation.
 
-```sh
-python main.py 
-```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+We extended our analysis by incorporating Sascha's gradient decision tree approach ([GDT](Scripts/GDT.ipynb)) to assess its performance on our dataset. This decision was prompted by the challenges faced by other machine learning techniques in achieving satisfactory results. Despite its potential, the gradient decision tree did not surpass the performance of Catboost in our experiments. It's worth noting that this outcome could be attributed to the fact that we did not thoroughly optimize the hyperparameters of the gradient decision tree. Further investigation into hyperparameter tuning might uncover its hidden potential.
 
 <!-- LICENSE -->
 ## License
@@ -121,21 +92,10 @@ Distributed under the MIT License.
 
 Patrick Knab: [Github Profile](https://github.com/P4ddyki)
 
-Marc Becker: [Github Profile](https://github.com/beckmarc)
+Mira Rotaru: [Github Profile](https://github.com/Mira-Rotaru)
+
+Diana Drăgușin: [Github Profile](https://github.com/DianaDragusin)
 
 Project Link: [https://github.com/European-MTP-Accute-Stroke-Detection/stroke-backend](https://github.com/European-MTP-Accute-Stroke-Detection/stroke-backend)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Helpful Resources:
-
-* [LIME](https://github.com/marcotcr/lime)
-* [SHAP](https://github.com/shap/shap)
-* [Grad-CAM](https://keras.io/examples/vision/grad_cam/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
